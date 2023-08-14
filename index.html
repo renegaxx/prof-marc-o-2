@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel de Agentes</title>
+    <style>
+        body {
+            background-image: url('https://a.espncdn.com/photo/2020/0604/r705265_1296x729_16-9.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            align-items: center;
+            text-align: center;
+            transition: background-image 0.5s ease-in-out;
+        }
+        .carrossel {
+            margin-top: 20px;
+        }
+        #anterior, #proximo {
+            width: 300px;
+            height: 200px;
+            align-items: center;
+            text-align: center;
+            border-radius: 40px;
+            font-size: 35px;
+        }
+        #proximo {
+            margin-left: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="carrossel">
+        <img id="carrosselImagem" src="" alt="Imagem do Carrossel">
+        <div>
+            <button id="anterior">Agente Anterior</button>
+            <button id="proximo">Próximo Agente</button>
+        </div>
+    </div>
+
+    <script>
+        let imgIndice = 0;
+        const IMAGENS = ['image1.png', 'image2.png', 'image3.png', 'image4.png'];
+        const FUNDO_IMAGENS = [
+            'url("https://a.espncdn.com/photo/2020/0604/r705265_1296x729_16-9.jpg")',
+            'url("https://i.pinimg.com/564x/0c/bc/83/0cbc83d14c667b90c4c27c27b2df3b5e.jpg")',
+            'url("https://i.pinimg.com/564x/91/6b/cb/916bcb19c1145d652713057f2b26dddb.jpg")', 
+            'url("https://esportenewsmundo.com.br/wp-content/uploads/2021/08/E7bJtssVIAcUhC2-scaled.jpg")'
+        ];
+        
+        const prevButton = document.getElementById('anterior');
+        const nextButton = document.getElementById('proximo');
+        var IMG = document.getElementById('carrosselImagem');
+
+        function carregar() {
+            if (imgIndice < 0) {
+                imgIndice = IMAGENS.length - 1;
+            } else if (imgIndice >= IMAGENS.length) {
+                imgIndice = 0;
+            }
+            IMG.src = IMAGENS[imgIndice];
+            document.body.style.backgroundImage = FUNDO_IMAGENS[imgIndice];
+        }
+
+        prevButton.addEventListener('click', () => {
+            --imgIndice;
+            carregar();
+        });
+
+        nextButton.addEventListener('click', () => {
+            ++imgIndice;
+            carregar();
+        });
+
+        carregar();
+    </script>
+</body>
+</html>
